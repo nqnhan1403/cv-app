@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CV</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- ═══════════════════════════════════════════════════
+       TEMPLATE STYLES - do not edit for content changes.
+       Edit cv-data.js instead.
+  ════════════════════════════════════════════════════ -->
+		<style>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			:root {
+				--ink: #111111;
+				--mid: #555555;
+				--light: #999999;
+				--rule: #e8e8e8;
+				--bg: #ffffff;
+			}
+
+			body {
+				font-family: "Inter", sans-serif;
+				background: #f5f5f5;
+				color: var(--ink);
+				font-size: 14px;
+				line-height: 1.7;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			/* ── Page shell — A4 width ───────────────── */
+			.page {
+				width: 210mm;
+				margin: 4rem auto;
+				background: var(--bg);
+				padding: 1.2cm 1.8cm;
+			}
+
+			/* ── Header ──────────────────────────────── */
+			header {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				align-items: end;
+				padding-bottom: 2.5rem;
+				border-bottom: 1px solid var(--ink);
+			}
+
+			.name {
+				font-size: 2.6rem;
+				font-weight: 300;
+				letter-spacing: -0.02em;
+				line-height: 1.1;
+			}
+
+			.title-tag {
+				font-size: 0.78rem;
+				font-weight: 500;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--light);
+				margin-top: 0.5rem;
+			}
+
+			.contacts {
+				text-align: right;
+				font-size: 0.82rem;
+				color: var(--mid);
+				line-height: 1.9;
+			}
+
+			.contacts a {
+				color: var(--mid);
+				text-decoration: none;
+			}
+
+			.contacts a:hover {
+				text-decoration: underline;
+			}
+
+			/* ── Profile section ─────────────────────── */
+			.profile-section {
+				margin-top: 2.5rem;
+				padding-bottom: 2rem;
+				border-bottom: 1px solid var(--rule);
+			}
+
+			/* ── Skills: 2-column grid ───────────────── */
+			.skills-section {
+				margin-top: 2rem;
+				padding-bottom: 2rem;
+				border-bottom: 1px solid var(--rule);
+			}
+
+			.skills-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem 3rem;
+			}
+
+			/* ── Full-width bottom: Projects ─────────── */
+			.body-bottom {
+				margin-top: 2rem;
+			}
+
+			/* ── Sidebar items ────────────────────────── */
+			.sidebar-section {
+				margin-bottom: 0;
+			}
+
+			.sidebar-label {
+				font-size: 0.7rem;
+				font-weight: 600;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--light);
+				margin-bottom: 0.5rem;
+			}
+
+			.skill-pills {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.35rem;
+			}
+
+			.skill-pill {
+				font-size: 0.78rem;
+				color: var(--mid);
+			}
+
+			.skill-pill + .skill-pill::before {
+				content: "·";
+				margin-right: 0.35rem;
+				color: var(--rule);
+			}
+
+			/* ── Section ─────────────────────────────── */
+			.section {
+				margin-bottom: 3rem;
+			}
+
+			.section:last-child {
+				margin-bottom: 0;
+			}
+
+			.section-label {
+				font-size: 0.7rem;
+				font-weight: 600;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--light);
+				margin-bottom: 1.4rem;
+			}
+
+			/* ── Profile ─────────────────────────────── */
+			.profile-text {
+				font-size: 0.88rem;
+				color: var(--mid);
+				line-height: 1.85;
+				white-space: pre-line;
+			}
+
+			/* ── Project ─────────────────────────────── */
+			.project {
+				margin-bottom: 2.8rem;
+			}
+			.project:last-child {
+				margin-bottom: 0;
+			}
+
+			.project-header {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				align-items: baseline;
+				margin-bottom: 0.3rem;
+			}
+
+			.project-name {
+				font-size: 1rem;
+				font-weight: 500;
+				letter-spacing: -0.01em;
+			}
+
+			.project-period {
+				font-size: 0.75rem;
+				color: var(--light);
+				letter-spacing: 0.04em;
+			}
+
+			.project-meta {
+				font-size: 0.75rem;
+				color: var(--light);
+				margin-bottom: 0.7rem;
+			}
+
+			.project-meta span + span::before {
+				content: "·";
+				margin: 0 0.45em;
+			}
+
+			.project-desc {
+				font-size: 0.84rem;
+				color: var(--mid);
+				margin-bottom: 1rem;
+				line-height: 1.75;
+				white-space: pre-line;
+			}
+
+			/* ── Two-column bullets for full-width projects ── */
+			.bullets-2col {
+				columns: 2;
+				column-gap: 2.5rem;
+			}
+
+			.sub-label {
+				font-size: 0.68rem;
+				font-weight: 600;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--light);
+				margin-bottom: 0.5rem;
+				margin-top: 0.9rem;
+			}
+
+			ul.bullets {
+				list-style: none;
+			}
+
+			ul.bullets li {
+				font-size: 0.82rem;
+				color: var(--mid);
+				line-height: 1.75;
+				padding-left: 1.1em;
+				position: relative;
+				margin-bottom: 0.3rem;
+				break-inside: avoid;
+			}
+
+			ul.bullets li::before {
+				content: "—";
+				position: absolute;
+				left: 0;
+				color: var(--rule);
+			}
+
+			.divider {
+				border: none;
+				border-top: 1px solid var(--rule);
+				margin: 2.2rem 0 2.4rem;
+			}
+
+			/* ── Tags ────────────────────────────────── */
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem;
+				margin-top: 0.8rem;
+			}
+
+			.tag {
+				font-size: 0.71rem;
+				font-weight: 500;
+				letter-spacing: 0.05em;
+				border: 1px solid var(--rule);
+				padding: 0.15rem 0.6rem;
+				color: var(--mid);
+			}
+
+			/* ══════════════════════════════════════════
+			   PRINT
+			══════════════════════════════════════════ */
+			@media print {
+				@page {
+					size: A4;
+					margin: 1.2cm 1.8cm;
+				}
+
+				body {
+					background: #fff;
+					font-size: 12.5px;
+				}
+
+				.page {
+					margin: 0;
+					padding: 0;
+					max-width: none;
+				}
+
+				/* ── Header ──────────────────────── */
+				header {
+					padding-bottom: 1.2rem;
+				}
+
+				.name {
+					font-size: 1.8rem;
+				}
+
+				/* ── Profile & Skills tighter ─────── */
+				.profile-section {
+					margin-top: 1.2rem;
+					padding-bottom: 1rem;
+				}
+
+				.skills-section {
+					margin-top: 1rem;
+					padding-bottom: 1rem;
+				}
+
+				.skills-grid {
+					gap: 0.5rem 2rem;
+				}
+
+				.sidebar-label {
+					margin-bottom: 0.15rem;
+				}
+
+				/* ── Bottom section ────────────────── */
+				.body-bottom {
+					margin-top: 1.5rem;
+				}
+
+				.section {
+					margin-bottom: 1.8rem;
+				}
+
+				.section-label {
+					margin-bottom: 0.6rem;
+				}
+
+				.project {
+					margin-bottom: 1.6rem;
+				}
+
+				.project-desc {
+					margin-bottom: 0.5rem;
+				}
+
+				.sub-label {
+					margin-top: 0.4rem;
+					margin-bottom: 0.2rem;
+				}
+
+				ul.bullets li {
+					margin-bottom: 0.1rem;
+					line-height: 1.55;
+				}
+
+				.divider {
+					margin: 1.2rem 0;
+				}
+
+				.tags {
+					margin-top: 0.4rem;
+				}
+
+				/* ── Page break control ───────────── */
+				.project-header,
+				.sub-label {
+					break-after: avoid;
+					break-inside: avoid;
+				}
+
+				ul.bullets li {
+					break-inside: avoid;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+     TEMPLATE - do not edit for content changes.
+     All content is driven by cv-data.js.
+-->
+
+		<div class="page">
+			<header>
+				<div>
+					<div class="name" id="t-name"></div>
+					<div class="title-tag" id="t-title"></div>
+				</div>
+				<div class="contacts" id="t-contact"></div>
+			</header>
+
+			<!-- Profile: full width -->
+			<div class="profile-section" id="t-profile"></div>
+
+			<!-- Skills: 2-column grid -->
+			<div class="skills-section">
+				<div class="section-label" id="t-skills-label">Skills</div>
+				<div class="skills-grid" id="t-sidebar"></div>
+			</div>
+
+			<!-- Education & Languages: 2-column grid -->
+			<div class="skills-section" id="t-credentials"></div>
+
+			<!-- Full-width: Projects + Pet Projects -->
+			<div class="body-bottom" id="t-projects"></div>
+		</div>
+
+		<!-- Load data first, then render -->
+		<script src="cv-data.js"></script>
+		<script>
+			/* ═══════════════════════════════════════════════════
+   RENDERER — do not edit unless changing layout logic.
+════════════════════════════════════════════════════ */
+
+			function render(data) {
+				/* helpers */
+				const $ = (id) => document.getElementById(id);
+				const el = (tag, cls, html) => {
+					const e = document.createElement(tag);
+					if (cls) e.className = cls;
+					if (html !== undefined) e.innerHTML = html;
+					return e;
+				};
+
+				// Clear all containers
+				$("t-name").innerHTML = "";
+				$("t-title").innerHTML = "";
+				$("t-contact").innerHTML = "";
+				$("t-profile").innerHTML = "";
+				$("t-sidebar").innerHTML = "";
+				$("t-credentials").innerHTML = "";
+				$("t-projects").innerHTML = "";
+
+				/* ── <title> & header ─────────────────────── */
+				document.title = data.meta.name + " — CV";
+				$("t-name").textContent = data.meta.name;
+				$("t-title").textContent = data.meta.title;
+
+				data.meta.contact.forEach((c) => {
+					const line = document.createElement("div");
+					if (c.href) {
+						const a = document.createElement("a");
+						a.href = c.href;
+						a.target = "_blank";
+						a.rel = "noopener";
+						a.textContent = c.label;
+						line.appendChild(a);
+					} else {
+						line.textContent = c.label;
+					}
+					$("t-contact").appendChild(line);
+				});
+
+				/* ── Profile (full-width section) ────────── */
+				const profileWrap = $("t-profile");
+				profileWrap.appendChild(el("div", "section-label", "Profile"));
+				const p = el("p", "profile-text");
+				p.textContent = data.profile.trim();
+				profileWrap.appendChild(p);
+
+				/* ── Skills (2-column grid) ───────────────── */
+				const sidebar = $("t-sidebar");
+				data.skills.forEach((group) => {
+					const sec = el("div", "sidebar-section");
+					sec.appendChild(el("div", "sidebar-label", group.label));
+					const pills = el("div", "skill-pills");
+					group.items.forEach((item) => {
+						pills.appendChild(el("span", "skill-pill", item));
+					});
+					sec.appendChild(pills);
+					sidebar.appendChild(sec);
+				});
+
+				/* ── Education & Languages (2-column grid) ── */
+				const credentials = $("t-credentials");
+				if (data.education || (data.languages && data.languages.length)) {
+					credentials.appendChild(
+						el("div", "section-label", "Education & Languages"),
+					);
+					const credGrid = el("div", "skills-grid");
+
+					if (data.education) {
+						const eduSec = el("div", "sidebar-section");
+						eduSec.appendChild(
+							el("div", "sidebar-label", "Education"),
+						);
+						const eduPills = el("div", "skill-pills");
+						const degreeLine = data.education.degree
+							? `${data.education.school} — ${data.education.degree}`
+							: data.education.school;
+						eduPills.appendChild(el("span", "skill-pill", degreeLine));
+						if (data.education.gpa) {
+							eduPills.appendChild(
+								el("span", "skill-pill", `GPA: ${data.education.gpa}`),
+							);
+						}
+						eduSec.appendChild(eduPills);
+						credGrid.appendChild(eduSec);
+					}
+
+					if (data.languages && data.languages.length) {
+						const langSec = el("div", "sidebar-section");
+						langSec.appendChild(
+							el("div", "sidebar-label", "Languages"),
+						);
+						const langPills = el("div", "skill-pills");
+						data.languages.forEach((l) => {
+							langPills.appendChild(
+								el("span", "skill-pill", `${l.name} (${l.level})`),
+							);
+						});
+						langSec.appendChild(langPills);
+						credGrid.appendChild(langSec);
+					}
+
+					credentials.appendChild(credGrid);
+				}
+
+				/* ── Helper: render a project card ────────── */
+				function renderProject(proj) {
+					const card = el("div", "project");
+
+					/* header row */
+					const hdr = el("div", "project-header");
+					hdr.appendChild(el("span", "project-name", proj.name));
+					if (proj.period)
+						hdr.appendChild(el("span", "project-period", proj.period));
+					card.appendChild(hdr);
+
+					/* meta */
+					const meta = el("div", "project-meta");
+					meta.appendChild(el("span", "", proj.role));
+					if (proj.company)
+						meta.appendChild(el("span", "", proj.company));
+					if (proj.teamSize)
+						meta.appendChild(
+							el("span", "", `Team size: ${proj.teamSize}`),
+						);
+					card.appendChild(meta);
+
+					/* description */
+					const desc = el("p", "project-desc");
+					desc.textContent = proj.description.trim();
+					card.appendChild(desc);
+
+					/* responsibilities */
+					if (proj.responsibilities && proj.responsibilities.length) {
+						card.appendChild(
+							el("div", "sub-label", "Responsibilities"),
+						);
+						const ul = el("ul", "bullets");
+						proj.responsibilities.forEach((r) =>
+							ul.appendChild(el("li", "", r)),
+						);
+						card.appendChild(ul);
+					}
+
+					/* technical */
+					if (proj.technical && proj.technical.length) {
+						card.appendChild(
+							el("div", "sub-label", "Technical Highlights"),
+						);
+						const ul = el("ul", "bullets");
+						proj.technical.forEach((t) =>
+							ul.appendChild(el("li", "", t)),
+						);
+						card.appendChild(ul);
+					}
+
+					/* tags */
+					if (proj.tags && proj.tags.length) {
+						const tags = el("div", "tags");
+						proj.tags.forEach((t) =>
+							tags.appendChild(el("span", "tag", t)),
+						);
+						card.appendChild(tags);
+					}
+
+					return card;
+				}
+
+				/* ── Projects (full-width body-bottom) ───── */
+				const projContainer = $("t-projects");
+
+				const projSec = el("div", "section");
+				projSec.appendChild(el("div", "section-label", "Projects"));
+
+				data.projects.forEach((proj, idx) => {
+					if (idx > 0) projSec.appendChild(el("hr", "divider"));
+					projSec.appendChild(renderProject(proj));
+				});
+
+				projContainer.appendChild(projSec);
+
+				/* ── Pet projects (full-width body-bottom) ── */
+				if (data.petProjects && data.petProjects.length > 0) {
+					const petSec = el("div", "section");
+					petSec.appendChild(el("div", "section-label", "Pet Projects"));
+
+					data.petProjects.forEach((proj, idx) => {
+						if (idx > 0) petSec.appendChild(el("hr", "divider"));
+						petSec.appendChild(renderProject(proj));
+					});
+
+					projContainer.appendChild(petSec);
+				}
+			}
+
+			// Initial render
+			window.addEventListener("DOMContentLoaded", () => {
+				if (typeof CV === "undefined") {
+					throw new Error("cv-data.js must define a global CV object.");
+				}
+				render(CV);
+			});
+		</script>
+	</body>
+</html>
